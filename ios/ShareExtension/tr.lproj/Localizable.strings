@@ -1,0 +1,8 @@
+"loading" = "Paylaşılan metin hazırlanıyor…";
+"transfer" = "Tuzak’a aktar";
+"cancel" = "Kapat";
+"unsupported" = "Metin alınamadı. Mesajı kopyalayıp Tuzak’a yapıştırabilirsin.";
+"invalid" = "Boş olmayan, en fazla 10.000 karakterlik bir mesaj paylaş.";
+"ready" = "Mesajını cihazında Tuzak’a aktar. Ardından bu pencereyi kapatıp Tuzak’ı aç. Bekleyen metin 10 dakika geçerlidir.";
+"saved" = "Mesaj hazır. Bu pencereyi kapatıp Tuzak’ı açabilirsin. Aktarılan metin bir kez okunduktan sonra silinir.";
+"failed" = "Mesaj aktarılamadı. Kopyala ve yapıştır yöntemini kullanabilirsin.";

@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "version": "synthetic-test-only",
+  "status": "ready",
+  "thresholds": {"suspicious": 0.25, "high": 0.6},
+  "rules": [
+    {"id": "urgency", "reason": "urgency", "kind": "contains", "weight": 0.25, "patterns": ["hemen", "acil"]},
+    {"id": "credentials", "reason": "credentials", "kind": "regex", "weight": 0.6, "patterns": ["sifreni\\s+paylas"]},
+    {"id": "payment", "reason": "payment", "kind": "contains", "weight": 0.5, "patterns": ["odeme yap"]},
+    {"id": "short-link", "reason": "shortLink", "kind": "host", "weight": 0.3, "patterns": ["short.test"]},
+    {"id": "brand-mismatch", "reason": "brandMismatch", "kind": "brandMismatch", "weight": 0.55, "patterns": []},
+    {"id": "risky-tld", "reason": "suspiciousDomain", "kind": "tld", "weight": 0.15, "patterns": ["example"]}
+  ]
+}

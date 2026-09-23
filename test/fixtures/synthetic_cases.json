@@ -1,0 +1,22 @@
+[
+  {"name": "ordinary text", "message": "Yarın saat üçte görüşürüz.", "level": "low", "score": 0.0},
+  {"name": "lower threshold included", "message": "Hemen kontrol et", "level": "suspicious", "score": 0.25},
+  {"name": "upper threshold included", "message": "ŞİFRENİ PAYLAŞ", "level": "suspicious", "score": 0.6},
+  {"name": "noisy OR", "message": "Hemen şifreni paylaş", "level": "high", "score": 0.7},
+  {"name": "repeated signals counted once", "message": "Hemen hemen hemen!", "level": "suspicious", "score": 0.25},
+  {"name": "official brand host", "message": "Testmarka https://testmarka.test", "level": "low", "score": 0.0},
+  {"name": "official subdomain", "message": "Testmarka https://login.testmarka.test", "level": "low", "score": 0.0},
+  {"name": "fake suffix", "message": "Testmarka https://testmarka.test.attacker.test", "level": "suspicious", "score": 0.55},
+  {"name": "fake prefix", "message": "Testmarka https://eviltestmarka.test", "level": "suspicious", "score": 0.55},
+  {"name": "brand word boundary", "message": "testmarkalar https://attacker.test", "level": "low", "score": 0.0},
+  {"name": "URL userinfo", "message": "Testmarka https://testmarka.test@attacker.test/path", "level": "suspicious", "score": 0.55},
+  {"name": "known shortener", "message": "https://short.test/a", "level": "suspicious", "score": 0.3},
+  {"name": "shortener substring not matched", "message": "https://notshort.test", "level": "low", "score": 0.0},
+  {"name": "USOM overrides score", "message": "https://malware.test", "level": "dangerous", "score": 0.0},
+  {"name": "USOM host case and trailing dot", "message": "HTTPS://MALWARE.TEST./a", "level": "dangerous", "score": 0.0},
+  {"name": "USOM does not match path", "message": "https://good.test/malware.test", "level": "low", "score": 0.0},
+  {"name": "USOM exact host scope", "message": "https://malware.test.good.test", "level": "low", "score": 0.0},
+  {"name": "URL punctuation", "message": "Bak (https://malware.test).", "level": "dangerous", "score": 0.0},
+  {"name": "bare URL", "message": "malware.test/path", "level": "dangerous", "score": 0.0},
+  {"name": "email not URL", "message": "hello@malware.test", "level": "low", "score": 0.0}
+]

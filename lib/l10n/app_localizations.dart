@@ -100,34 +100,106 @@ abstract class AppLocalizations {
   /// **'Tuzak'**
   String get appName;
 
+  /// No description provided for @splashTagline.
+  ///
+  /// In tr, this message translates to:
+  /// **'Mesajı, e-postayı, linki ya da numarayı gönder; birlikte bakalım.'**
+  String get splashTagline;
+
+  /// No description provided for @startCheck.
+  ///
+  /// In tr, this message translates to:
+  /// **'Mesaj kontrol et'**
+  String get startCheck;
+
+  /// No description provided for @welcomeDescription.
+  ///
+  /// In tr, this message translates to:
+  /// **'Mesajı, e-postayı, linki ya da numarayı gönder; birlikte bakalım.'**
+  String get welcomeDescription;
+
+  /// No description provided for @featureLinks.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bağlantı kontrolü'**
+  String get featureLinks;
+
+  /// No description provided for @featureLinksBody.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sahte adresleri hemen fark et.'**
+  String get featureLinksBody;
+
+  /// No description provided for @featureMessages.
+  ///
+  /// In tr, this message translates to:
+  /// **'Anlaşılır sonuçlar'**
+  String get featureMessages;
+
+  /// No description provided for @featureMessagesBody.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ne olduğunu ve ne yapacağını gör.'**
+  String get featureMessagesBody;
+
+  /// No description provided for @homeTip.
+  ///
+  /// In tr, this message translates to:
+  /// **'Seni acele ettiriyorsa önce dur.'**
+  String get homeTip;
+
+  /// No description provided for @homeTipBody.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kodunu ya da şifreni kimseyle paylaşma.'**
+  String get homeTipBody;
+
+  /// No description provided for @searchHeader.
+  ///
+  /// In tr, this message translates to:
+  /// **'Mesaj kontrolü'**
+  String get searchHeader;
+
+  /// No description provided for @searchTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Şüpheyi birlikte\ninceleyelim.'**
+  String get searchTitle;
+
+  /// No description provided for @searchSubtitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Mesajı buraya yapıştır.'**
+  String get searchSubtitle;
+
   /// No description provided for @tagline.
   ///
   /// In tr, this message translates to:
   /// **'Tıklamadan önce,\nbir kontrol.'**
   String get tagline;
 
-  /// No description provided for @homeSubtitle.
-  ///
-  /// In tr, this message translates to:
-  /// **'Şüpheli mesajı yapıştır. Risk işaretlerine\nbirlikte bakalım.'**
-  String get homeSubtitle;
-
   /// No description provided for @offline.
   ///
   /// In tr, this message translates to:
-  /// **'Cihazında çalışır'**
+  /// **'Mesaj içeriği cihazında kalır'**
   String get offline;
+
+  /// No description provided for @offlineWarning.
+  ///
+  /// In tr, this message translates to:
+  /// **'İnternet bağlantısı yok — kontroller sınırlı olabilir.'**
+  String get offlineWarning;
 
   /// No description provided for @messageLabel.
   ///
   /// In tr, this message translates to:
-  /// **'KONTROL EDİLECEK MESAJ'**
+  /// **'MESAJ'**
   String get messageLabel;
 
   /// No description provided for @messageHint.
   ///
   /// In tr, this message translates to:
-  /// **'SMS, WhatsApp veya e-posta mesajını buraya yapıştır…'**
+  /// **'Mesajını buraya yapıştır…'**
   String get messageHint;
 
   /// No description provided for @paste.
@@ -157,68 +229,14 @@ abstract class AppLocalizations {
   /// No description provided for @privacyNote.
   ///
   /// In tr, this message translates to:
-  /// **'Mesajın yalnızca senin cihazında kalır.'**
+  /// **'Mesajın sende kalır. Biz sadece linkleri ve numaraları kontrol ederiz.'**
   String get privacyNote;
 
   /// No description provided for @privacyShort.
   ///
   /// In tr, this message translates to:
-  /// **'Üyelik yok. Mesaj geçmişi yok.'**
+  /// **'Üyelik yok, geçmiş yok.'**
   String get privacyShort;
-
-  /// No description provided for @howItWorks.
-  ///
-  /// In tr, this message translates to:
-  /// **'NASIL ÇALIŞIR?'**
-  String get howItWorks;
-
-  /// No description provided for @stepPaste.
-  ///
-  /// In tr, this message translates to:
-  /// **'Mesajı yapıştır'**
-  String get stepPaste;
-
-  /// No description provided for @stepCheck.
-  ///
-  /// In tr, this message translates to:
-  /// **'İşaretleri incele'**
-  String get stepCheck;
-
-  /// No description provided for @stepDecide.
-  ///
-  /// In tr, this message translates to:
-  /// **'Bilinçli karar ver'**
-  String get stepDecide;
-
-  /// No description provided for @previewTitle.
-  ///
-  /// In tr, this message translates to:
-  /// **'Önce bir göz at'**
-  String get previewTitle;
-
-  /// No description provided for @previewSubtitle.
-  ///
-  /// In tr, this message translates to:
-  /// **'Dört farklı örnek sonucu keşfet.'**
-  String get previewSubtitle;
-
-  /// No description provided for @previewLabel.
-  ///
-  /// In tr, this message translates to:
-  /// **'ÖRNEK SONUÇ'**
-  String get previewLabel;
-
-  /// No description provided for @previewNotice.
-  ///
-  /// In tr, this message translates to:
-  /// **'Bu bir tasarım örneğidir; mesajın analiz edilmedi.'**
-  String get previewNotice;
-
-  /// No description provided for @previewFootnote.
-  ///
-  /// In tr, this message translates to:
-  /// **'Önizleme sürümü · Gerçek analiz için kural seti bekleniyor.'**
-  String get previewFootnote;
 
   /// No description provided for @analysis.
   ///
@@ -256,64 +274,88 @@ abstract class AppLocalizations {
   /// **'Tehlikeli'**
   String get dangerousLabel;
 
-  /// No description provided for @lowTitle.
+  /// No description provided for @linkCleanTitle.
   ///
   /// In tr, this message translates to:
-  /// **'Belirgin risk\nbulunamadı.'**
-  String get lowTitle;
+  /// **'Bağlantı temiz'**
+  String get linkCleanTitle;
 
-  /// No description provided for @suspiciousTitle.
+  /// No description provided for @numberCleanTitle.
   ///
   /// In tr, this message translates to:
-  /// **'Biraz temkinli\nolmakta fayda var.'**
-  String get suspiciousTitle;
+  /// **'Numara temiz'**
+  String get numberCleanTitle;
 
-  /// No description provided for @highTitle.
+  /// No description provided for @messageCleanTitle.
   ///
   /// In tr, this message translates to:
-  /// **'Bu mesajda\nrisk işaretleri var.'**
-  String get highTitle;
+  /// **'Mesaj temiz'**
+  String get messageCleanTitle;
 
-  /// No description provided for @dangerousTitle.
+  /// No description provided for @suspiciousMessageTitle.
   ///
   /// In tr, this message translates to:
-  /// **'Bu bağlantıdan\nuzak dur.'**
-  String get dangerousTitle;
+  /// **'Bu mesaj içime sinmedi'**
+  String get suspiciousMessageTitle;
 
-  /// No description provided for @lowDescription.
+  /// No description provided for @suspiciousLinkTitle.
   ///
   /// In tr, this message translates to:
-  /// **'Kontrol edilen yerel kurallar belirgin bir risk işareti bulmadı. Bu, güvenlik garantisi değildir.'**
-  String get lowDescription;
+  /// **'Bu link içime sinmedi'**
+  String get suspiciousLinkTitle;
 
-  /// No description provided for @suspiciousDescription.
+  /// No description provided for @suspiciousNumberTitle.
   ///
   /// In tr, this message translates to:
-  /// **'Bazı ifadeler veya bağlantılar dikkat gerektiriyor. İşlem yapmadan önce resmi kanaldan doğrula.'**
-  String get suspiciousDescription;
+  /// **'Bu numara içime sinmedi'**
+  String get suspiciousNumberTitle;
 
-  /// No description provided for @highDescription.
+  /// No description provided for @highMessageTitle.
   ///
   /// In tr, this message translates to:
-  /// **'Bu mesaj dolandırıcılık girişimiyle ilişkili işaretler taşıyor. Acele etmeden bir adım geri çekil.'**
-  String get highDescription;
+  /// **'Bu mesaja güvenme'**
+  String get highMessageTitle;
 
-  /// No description provided for @dangerousDescription.
+  /// No description provided for @highLinkTitle.
   ///
   /// In tr, this message translates to:
-  /// **'Mesajdaki bir alan adı cihazdaki zararlı alan adı listesiyle eşleşiyor. Bağlantıyı açma.'**
-  String get dangerousDescription;
+  /// **'Bu linke güvenme'**
+  String get highLinkTitle;
+
+  /// No description provided for @highNumberTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bu numaraya güvenme'**
+  String get highNumberTitle;
+
+  /// No description provided for @dangerousMessageTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bu mesaja cevap verme'**
+  String get dangerousMessageTitle;
+
+  /// No description provided for @dangerousLinkTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bu linki açma'**
+  String get dangerousLinkTitle;
+
+  /// No description provided for @dangerousNumberTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bu numarayı arama'**
+  String get dangerousNumberTitle;
 
   /// No description provided for @whyLow.
   ///
   /// In tr, this message translates to:
-  /// **'NELERE BAKTIK?'**
+  /// **'KONTROL SONUCU'**
   String get whyLow;
 
   /// No description provided for @whyFlagged.
   ///
   /// In tr, this message translates to:
-  /// **'NEDEN DİKKAT ETMELİSİN?'**
+  /// **'NEDEN ŞÜPHELİ?'**
   String get whyFlagged;
 
   /// No description provided for @recommendedActions.
@@ -328,233 +370,233 @@ abstract class AppLocalizations {
   /// **'Başka mesaj kontrol et'**
   String get scanAnother;
 
-  /// No description provided for @resultDisclaimer.
-  ///
-  /// In tr, this message translates to:
-  /// **'Tuzak bir yardımcıdır; gönderenin kimliğini doğrulamaz.'**
-  String get resultDisclaimer;
-
   /// No description provided for @noSignalsTitle.
   ///
   /// In tr, this message translates to:
-  /// **'Belirgin bir kural eşleşmesi yok'**
+  /// **'Ters giden bir şey bulamadık'**
   String get noSignalsTitle;
-
-  /// No description provided for @noSignalsBody.
-  ///
-  /// In tr, this message translates to:
-  /// **'İncelenen metinde etkin kurallarla eşleşen bir risk işareti bulunamadı.'**
-  String get noSignalsBody;
 
   /// No description provided for @urgencyTitle.
   ///
   /// In tr, this message translates to:
-  /// **'Acele ettiren ifadeler'**
+  /// **'Seni acele ettirmeye çalışıyor'**
   String get urgencyTitle;
-
-  /// No description provided for @urgencyBody.
-  ///
-  /// In tr, this message translates to:
-  /// **'Hemen işlem yapmanı isteyen dil, düşünmeden karar vermene yol açabilir.'**
-  String get urgencyBody;
 
   /// No description provided for @credentialsTitle.
   ///
   /// In tr, this message translates to:
-  /// **'Şifre veya kod talebi'**
+  /// **'Şifre ya da kart bilgisi istiyor'**
   String get credentialsTitle;
 
-  /// No description provided for @credentialsBody.
+  /// No description provided for @codeRequestTitle.
   ///
   /// In tr, this message translates to:
-  /// **'Mesaj, özel erişim bilgilerini ya da tek kullanımlık kodunu paylaşmanı istiyor.'**
-  String get credentialsBody;
+  /// **'Senden doğrulama kodunu istiyor'**
+  String get codeRequestTitle;
 
   /// No description provided for @paymentTitle.
   ///
   /// In tr, this message translates to:
-  /// **'Ödeme talebi'**
+  /// **'Senden para göndermeni istiyor'**
   String get paymentTitle;
-
-  /// No description provided for @paymentBody.
-  ///
-  /// In tr, this message translates to:
-  /// **'İşlem yapmadan önce ödeme isteğini bağımsız bir resmi kanaldan doğrula.'**
-  String get paymentBody;
 
   /// No description provided for @shortLinkTitle.
   ///
   /// In tr, this message translates to:
-  /// **'Hedefi gizleyen bağlantı'**
+  /// **'Bu link nereye gittiğini gizliyor'**
   String get shortLinkTitle;
-
-  /// No description provided for @shortLinkBody.
-  ///
-  /// In tr, this message translates to:
-  /// **'Kısaltılmış bağlantının son adresi çevrimdışı doğrulanamaz.'**
-  String get shortLinkBody;
 
   /// No description provided for @brandTitle.
   ///
   /// In tr, this message translates to:
-  /// **'Markayla uyuşmayan alan adı'**
+  /// **'Bu marka değil, sadece öyle görünüyor'**
   String get brandTitle;
-
-  /// No description provided for @brandBody.
-  ///
-  /// In tr, this message translates to:
-  /// **'Mesajdaki marka adıyla bağlantının alan adı, yerel resmi adres listesinde uyuşmuyor.'**
-  String get brandBody;
 
   /// No description provided for @domainTitle.
   ///
   /// In tr, this message translates to:
-  /// **'Şüpheli alan adı'**
+  /// **'Bu link güvenilir görünmüyor'**
   String get domainTitle;
 
-  /// No description provided for @domainBody.
+  /// No description provided for @lookalikeTitle.
   ///
   /// In tr, this message translates to:
-  /// **'Bağlantı, kural setinde tanımlanan bir alan adı risk işareti taşıyor.'**
-  String get domainBody;
+  /// **'Site adı gerçeğine çok benzetilmiş'**
+  String get lookalikeTitle;
+
+  /// No description provided for @riskyTldTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Link alışılmadık bir uzantı kullanıyor'**
+  String get riskyTldTitle;
+
+  /// No description provided for @ipHostTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Linkte site adı yerine sayı var'**
+  String get ipHostTitle;
+
+  /// No description provided for @punycodeTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Linkte taklit harfler olabilir'**
+  String get punycodeTitle;
+
+  /// No description provided for @manyHyphensTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Link gerçek site adını gizliyor'**
+  String get manyHyphensTitle;
+
+  /// No description provided for @longSubdomainTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Uzun adres gerçek siteyi gizliyor'**
+  String get longSubdomainTitle;
+
+  /// No description provided for @atSignTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'@ işaretinden önceki ada aldanma'**
+  String get atSignTitle;
+
+  /// No description provided for @nonHttpsTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bu link güvenli bağlantı kullanmıyor'**
+  String get nonHttpsTitle;
+
+  /// No description provided for @deceptiveDomainTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Gerçek site adı linkin içine saklanmış'**
+  String get deceptiveDomainTitle;
 
   /// No description provided for @usomTitle.
   ///
   /// In tr, this message translates to:
-  /// **'Zararlı alan adı eşleşmesi'**
+  /// **'Bu link daha önce zararlı diye işaretlenmiş'**
   String get usomTitle;
-
-  /// No description provided for @usomBody.
-  ///
-  /// In tr, this message translates to:
-  /// **'Bir alan adı, cihazda bulunan USOM veri kümesiyle eşleşti.'**
-  String get usomBody;
 
   /// No description provided for @genericSignalTitle.
   ///
   /// In tr, this message translates to:
-  /// **'Dikkat gerektiren ifade'**
+  /// **'Mesajın dili doğal görünmüyor'**
   String get genericSignalTitle;
 
-  /// No description provided for @genericSignalBody.
+  /// No description provided for @cargoTitle.
   ///
   /// In tr, this message translates to:
-  /// **'Mesaj, yerel kural setinde tanımlanan bir risk örüntüsüyle eşleşiyor.'**
-  String get genericSignalBody;
+  /// **'Sahte bir kargo bildirimi olabilir'**
+  String get cargoTitle;
+
+  /// No description provided for @governmentTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Resmi kurum gibi konuşuyor'**
+  String get governmentTitle;
+
+  /// No description provided for @bankCardTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Banka mesajı gibi görünmeye çalışıyor'**
+  String get bankCardTitle;
+
+  /// No description provided for @prizeTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Olmadık bir ödül vadediyor'**
+  String get prizeTitle;
+
+  /// No description provided for @easyMoneyTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kolay para vadediyor'**
+  String get easyMoneyTitle;
+
+  /// No description provided for @familyImpersonationTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Tanıdığın biri gibi davranıyor'**
+  String get familyImpersonationTitle;
+
+  /// No description provided for @promotionTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kampanya bahanesiyle dikkatini çekiyor'**
+  String get promotionTitle;
 
   /// No description provided for @protectSecretsTitle.
   ///
   /// In tr, this message translates to:
-  /// **'Kodların ve şifrelerin sende kalsın'**
+  /// **'Kimseyle kod ya da şifre paylaşma'**
   String get protectSecretsTitle;
-
-  /// No description provided for @protectSecretsBody.
-  ///
-  /// In tr, this message translates to:
-  /// **'Tek kullanımlık SMS kodunu, kart şifreni veya hesap parolanı kimseyle paylaşma.'**
-  String get protectSecretsBody;
 
   /// No description provided for @officialAppTitle.
   ///
   /// In tr, this message translates to:
-  /// **'Resmi uygulamadan kontrol et'**
+  /// **'Şüphen varsa resmi uygulamadan bak'**
   String get officialAppTitle;
-
-  /// No description provided for @officialAppBody.
-  ///
-  /// In tr, this message translates to:
-  /// **'Şüphen varsa bağlantıya dokunmak yerine kurumun uygulamasını kendin aç.'**
-  String get officialAppBody;
 
   /// No description provided for @verifyTitle.
   ///
   /// In tr, this message translates to:
-  /// **'Göndereni bağımsız olarak doğrula'**
+  /// **'Göndereni resmi kanaldan kontrol et'**
   String get verifyTitle;
 
-  /// No description provided for @verifyBody.
+  /// No description provided for @doNotEngageMessageTitle.
   ///
   /// In tr, this message translates to:
-  /// **'Mesajdaki numarayı kullanmadan, kurumun bilinen resmi iletişim kanalından teyit al.'**
-  String get verifyBody;
+  /// **'Cevap yazma, bilgi paylaşma'**
+  String get doNotEngageMessageTitle;
 
-  /// No description provided for @doNotTapTitle.
+  /// No description provided for @doNotEngageLinkTitle.
   ///
   /// In tr, this message translates to:
-  /// **'Bağlantıyı açma, yanıt verme'**
-  String get doNotTapTitle;
+  /// **'Linke tıklama, cevap yazma'**
+  String get doNotEngageLinkTitle;
 
-  /// No description provided for @doNotTapBody.
+  /// No description provided for @doNotEngageNumberTitle.
   ///
   /// In tr, this message translates to:
-  /// **'Kişisel bilgi paylaşma ve mesaj üzerinden ödeme yapma.'**
-  String get doNotTapBody;
-
-  /// No description provided for @deleteTitle.
-  ///
-  /// In tr, this message translates to:
-  /// **'Mesajı sil veya engelle'**
-  String get deleteTitle;
-
-  /// No description provided for @deleteBody.
-  ///
-  /// In tr, this message translates to:
-  /// **'Gerekli bir bildirim için kanıtı sakladıktan sonra mesajı kaldırabilirsin.'**
-  String get deleteBody;
+  /// **'Bu numarayı arama, cevap yazma'**
+  String get doNotEngageNumberTitle;
 
   /// No description provided for @contactBankTitle.
   ///
   /// In tr, this message translates to:
-  /// **'Bilgi paylaştıysan bankana ulaş'**
+  /// **'Bankanı resmi numaradan ara'**
   String get contactBankTitle;
 
-  /// No description provided for @contactBankBody.
-  ///
-  /// In tr, this message translates to:
-  /// **'Kartının arkasındaki numarayı veya bankanın resmi uygulamasını kullan.'**
-  String get contactBankBody;
-
-  /// No description provided for @emergencyTitle.
-  ///
-  /// In tr, this message translates to:
-  /// **'Acil tehlikede 112'**
-  String get emergencyTitle;
-
-  /// No description provided for @emergencyBody.
-  ///
-  /// In tr, this message translates to:
-  /// **'Yalnızca acil yardım gerektiren bir durum varsa ara.'**
-  String get emergencyBody;
-
-  /// No description provided for @call.
+  /// No description provided for @callAction.
   ///
   /// In tr, this message translates to:
   /// **'Ara'**
-  String get call;
+  String get callAction;
 
-  /// No description provided for @callConfirmTitle.
+  /// No description provided for @bankCallHint.
   ///
   /// In tr, this message translates to:
-  /// **'Telefon uygulaması açılsın mı?'**
-  String get callConfirmTitle;
+  /// **'Kartının arkasındaki ya da bankanın resmi uygulamasındaki numarayı yaz.'**
+  String get bankCallHint;
 
-  /// No description provided for @callConfirmBody.
+  /// No description provided for @bankPhoneLabel.
   ///
   /// In tr, this message translates to:
-  /// **'112 yalnızca acil durumlar içindir. Arama telefon uygulamasında devam eder.'**
-  String get callConfirmBody;
+  /// **'Bankanın resmi numarası'**
+  String get bankPhoneLabel;
 
-  /// No description provided for @cancel.
+  /// No description provided for @openPhone.
   ///
   /// In tr, this message translates to:
-  /// **'Vazgeç'**
-  String get cancel;
+  /// **'Telefonu aç'**
+  String get openPhone;
 
-  /// No description provided for @callUnavailable.
+  /// No description provided for @phoneUnavailable.
   ///
   /// In tr, this message translates to:
-  /// **'Telefon uygulaması açılamadı. Acil durumda telefonundan 112’yi arayabilirsin.'**
-  String get callUnavailable;
+  /// **'Telefon açılamadı. Numarayı telefon uygulamandan arayabilirsin.'**
+  String get phoneUnavailable;
 
   /// No description provided for @clipboardEmpty.
   ///
@@ -571,13 +613,79 @@ abstract class AppLocalizations {
   /// No description provided for @analysisUnavailable.
   ///
   /// In tr, this message translates to:
-  /// **'Analiz henüz hazır değil. Doğrulanmış kural seti bu sürüme eklenmedi. Aşağıdan örnek sonuçları inceleyebilirsin.'**
+  /// **'Kontrol şu an kullanılamıyor. Uygulamayı yeniden başlatıp tekrar dene.'**
   String get analysisUnavailable;
+
+  /// No description provided for @threatCheckComplete.
+  ///
+  /// In tr, this message translates to:
+  /// **'Alan adları resmi kayıtlarla karşılaştırıldı.'**
+  String get threatCheckComplete;
+
+  /// No description provided for @threatCheckPartial.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bazı alan adları resmi kayıtlarla karşılaştırıldı; diğerleri yerel olarak incelendi.'**
+  String get threatCheckPartial;
+
+  /// No description provided for @threatCheckLocal.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yalnızca yerel analiz kullanıldı.'**
+  String get threatCheckLocal;
+
+  /// No description provided for @threatCheckUnavailable.
+  ///
+  /// In tr, this message translates to:
+  /// **'Resmi kayıt kontrolü tamamlanamadı; yalnızca yerel analiz kullanıldı.'**
+  String get threatCheckUnavailable;
+
+  /// No description provided for @limitedCheckLabel.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kontrol yarım kaldı'**
+  String get limitedCheckLabel;
+
+  /// No description provided for @limitedCheckTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Linki tam kontrol edemedik'**
+  String get limitedCheckTitle;
+
+  /// No description provided for @officialThreatBankTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bu adres banka dolandırıcılığı kayıtlarında var'**
+  String get officialThreatBankTitle;
+
+  /// No description provided for @officialThreatPhishingTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bu adres oltalama kayıtlarında var'**
+  String get officialThreatPhishingTitle;
+
+  /// No description provided for @officialThreatMalwareTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bu adres zararlı yazılım kayıtlarında var'**
+  String get officialThreatMalwareTitle;
+
+  /// No description provided for @officialThreatTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bu adres tehdit kayıtlarında var'**
+  String get officialThreatTitle;
+
+  /// No description provided for @officialCleanTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kayıtlarda sorun görünmüyor'**
+  String get officialCleanTitle;
 
   /// No description provided for @analysisFailed.
   ///
   /// In tr, this message translates to:
-  /// **'Analiz tamamlanamadı. Mesaj için bir risk sonucu üretilmedi. Lütfen yeniden dene.'**
+  /// **'Kontrol tamamlanamadı. Lütfen yeniden dene.'**
   String get analysisFailed;
 
   /// No description provided for @inputTooLong.
@@ -613,7 +721,7 @@ abstract class AppLocalizations {
   /// No description provided for @infoDescription.
   ///
   /// In tr, this message translates to:
-  /// **'Tuzak, mesajlardaki dolandırıcılık işaretlerini anlamana yardımcı olmak için tasarlandı.'**
+  /// **'Tuzak, şüpheli mesajları anlamana yardımcı olur.'**
   String get infoDescription;
 
   /// No description provided for @privacyTitle.
@@ -625,19 +733,19 @@ abstract class AppLocalizations {
   /// No description provided for @privacyBody.
   ///
   /// In tr, this message translates to:
-  /// **'Mesajlar sunucuya gönderilmez. Hesap, analiz geçmişi, reklam veya analitik takibi yoktur. İşlem bitince mesaj bellekte tutulmaz.'**
+  /// **'Mesaj içeriği cihazınızdan çıkmaz; yalnızca bağlantılar ve telefon numaraları güvenlik kontrolü için T.C. Siber Güvenlik Başkanlığı\'na sorgulanır. Mesaj geçmişi kaydedilmez.'**
   String get privacyBody;
 
   /// No description provided for @sourcesTitle.
   ///
   /// In tr, this message translates to:
-  /// **'Yerel kurallar, açık sınırlar'**
+  /// **'Neler kontrol edilir?'**
   String get sourcesTitle;
 
   /// No description provided for @sourcesBody.
   ///
   /// In tr, this message translates to:
-  /// **'Analiz; metin kuralları, resmi marka adresleri ve yerel zararlı alan adı listesiyle çalışacak. Kaynaklar eklenmeden gerçek analiz etkinleştirilmez. Liste eşleşmesi bulunmaması bir adresin güvenli olduğunu kanıtlamaz.'**
+  /// **'Mesaj cihazda incelenir. İnternet varsa bağlantılar ve telefon numaraları resmi tehdit kayıtlarında da sorgulanır. Sonuç güvenlik garantisi değildir.'**
   String get sourcesBody;
 
   /// No description provided for @shareTitle.
@@ -649,62 +757,20 @@ abstract class AppLocalizations {
   /// No description provided for @shareBody.
   ///
   /// In tr, this message translates to:
-  /// **'iPhone’da metin paylaşımını destekleyen bir uygulamada Paylaş → Tuzak’ı seç. Ardından Tuzak’ı aç. Aktarılan metin bir kez okunur ve geçici kopyası silinir; bekleyen içerik en fazla 10 dakika geçerlidir.'**
+  /// **'iPhone’da mesajı seçip Paylaş → Tuzak yolunu izle.'**
   String get shareBody;
 
   /// No description provided for @sharePreviewBody.
   ///
   /// In tr, this message translates to:
-  /// **'Paylaşarak metin alma özelliği iOS içindir. Bu önizlemede mesajı kopyalayıp yapıştırabilirsin.'**
+  /// **'Mesajı kopyalayıp kontrol ekranına yapıştır.'**
   String get sharePreviewBody;
-
-  /// No description provided for @ruleVersion.
-  ///
-  /// In tr, this message translates to:
-  /// **'Kural seti'**
-  String get ruleVersion;
-
-  /// No description provided for @brandVersion.
-  ///
-  /// In tr, this message translates to:
-  /// **'Marka listesi'**
-  String get brandVersion;
-
-  /// No description provided for @usomVersion.
-  ///
-  /// In tr, this message translates to:
-  /// **'USOM listesi'**
-  String get usomVersion;
-
-  /// No description provided for @pending.
-  ///
-  /// In tr, this message translates to:
-  /// **'Henüz eklenmedi'**
-  String get pending;
-
-  /// No description provided for @unavailable.
-  ///
-  /// In tr, this message translates to:
-  /// **'Yüklenemedi'**
-  String get unavailable;
-
-  /// No description provided for @version.
-  ///
-  /// In tr, this message translates to:
-  /// **'Sürüm 0.1.0 · Önizleme'**
-  String get version;
 
   /// No description provided for @licenses.
   ///
   /// In tr, this message translates to:
   /// **'Açık kaynak lisansları'**
   String get licenses;
-
-  /// No description provided for @localAnalysis.
-  ///
-  /// In tr, this message translates to:
-  /// **'YEREL ANALİZ'**
-  String get localAnalysis;
 
   /// No description provided for @characterCount.
   ///

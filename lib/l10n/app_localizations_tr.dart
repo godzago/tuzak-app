@@ -12,21 +12,58 @@ class AppLocalizationsTr extends AppLocalizations {
   String get appName => 'Tuzak';
 
   @override
+  String get splashTagline =>
+      'Mesajı, e-postayı, linki ya da numarayı gönder; birlikte bakalım.';
+
+  @override
+  String get startCheck => 'Mesaj kontrol et';
+
+  @override
+  String get welcomeDescription =>
+      'Mesajı, e-postayı, linki ya da numarayı gönder; birlikte bakalım.';
+
+  @override
+  String get featureLinks => 'Bağlantı kontrolü';
+
+  @override
+  String get featureLinksBody => 'Sahte adresleri hemen fark et.';
+
+  @override
+  String get featureMessages => 'Anlaşılır sonuçlar';
+
+  @override
+  String get featureMessagesBody => 'Ne olduğunu ve ne yapacağını gör.';
+
+  @override
+  String get homeTip => 'Seni acele ettiriyorsa önce dur.';
+
+  @override
+  String get homeTipBody => 'Kodunu ya da şifreni kimseyle paylaşma.';
+
+  @override
+  String get searchHeader => 'Mesaj kontrolü';
+
+  @override
+  String get searchTitle => 'Şüpheyi birlikte\ninceleyelim.';
+
+  @override
+  String get searchSubtitle => 'Mesajı buraya yapıştır.';
+
+  @override
   String get tagline => 'Tıklamadan önce,\nbir kontrol.';
 
   @override
-  String get homeSubtitle =>
-      'Şüpheli mesajı yapıştır. Risk işaretlerine\nbirlikte bakalım.';
+  String get offline => 'Mesaj içeriği cihazında kalır';
 
   @override
-  String get offline => 'Cihazında çalışır';
+  String get offlineWarning =>
+      'İnternet bağlantısı yok — kontroller sınırlı olabilir.';
 
   @override
-  String get messageLabel => 'KONTROL EDİLECEK MESAJ';
+  String get messageLabel => 'MESAJ';
 
   @override
-  String get messageHint =>
-      'SMS, WhatsApp veya e-posta mesajını buraya yapıştır…';
+  String get messageHint => 'Mesajını buraya yapıştır…';
 
   @override
   String get paste => 'Yapıştır';
@@ -41,39 +78,11 @@ class AppLocalizationsTr extends AppLocalizations {
   String get clear => 'Mesajı temizle';
 
   @override
-  String get privacyNote => 'Mesajın yalnızca senin cihazında kalır.';
+  String get privacyNote =>
+      'Mesajın sende kalır. Biz sadece linkleri ve numaraları kontrol ederiz.';
 
   @override
-  String get privacyShort => 'Üyelik yok. Mesaj geçmişi yok.';
-
-  @override
-  String get howItWorks => 'NASIL ÇALIŞIR?';
-
-  @override
-  String get stepPaste => 'Mesajı yapıştır';
-
-  @override
-  String get stepCheck => 'İşaretleri incele';
-
-  @override
-  String get stepDecide => 'Bilinçli karar ver';
-
-  @override
-  String get previewTitle => 'Önce bir göz at';
-
-  @override
-  String get previewSubtitle => 'Dört farklı örnek sonucu keşfet.';
-
-  @override
-  String get previewLabel => 'ÖRNEK SONUÇ';
-
-  @override
-  String get previewNotice =>
-      'Bu bir tasarım örneğidir; mesajın analiz edilmedi.';
-
-  @override
-  String get previewFootnote =>
-      'Önizleme sürümü · Gerçek analiz için kural seti bekleniyor.';
+  String get privacyShort => 'Üyelik yok, geçmiş yok.';
 
   @override
   String get analysis => 'Mesaj analizi';
@@ -94,38 +103,46 @@ class AppLocalizationsTr extends AppLocalizations {
   String get dangerousLabel => 'Tehlikeli';
 
   @override
-  String get lowTitle => 'Belirgin risk\nbulunamadı.';
+  String get linkCleanTitle => 'Bağlantı temiz';
 
   @override
-  String get suspiciousTitle => 'Biraz temkinli\nolmakta fayda var.';
+  String get numberCleanTitle => 'Numara temiz';
 
   @override
-  String get highTitle => 'Bu mesajda\nrisk işaretleri var.';
+  String get messageCleanTitle => 'Mesaj temiz';
 
   @override
-  String get dangerousTitle => 'Bu bağlantıdan\nuzak dur.';
+  String get suspiciousMessageTitle => 'Bu mesaj içime sinmedi';
 
   @override
-  String get lowDescription =>
-      'Kontrol edilen yerel kurallar belirgin bir risk işareti bulmadı. Bu, güvenlik garantisi değildir.';
+  String get suspiciousLinkTitle => 'Bu link içime sinmedi';
 
   @override
-  String get suspiciousDescription =>
-      'Bazı ifadeler veya bağlantılar dikkat gerektiriyor. İşlem yapmadan önce resmi kanaldan doğrula.';
+  String get suspiciousNumberTitle => 'Bu numara içime sinmedi';
 
   @override
-  String get highDescription =>
-      'Bu mesaj dolandırıcılık girişimiyle ilişkili işaretler taşıyor. Acele etmeden bir adım geri çekil.';
+  String get highMessageTitle => 'Bu mesaja güvenme';
 
   @override
-  String get dangerousDescription =>
-      'Mesajdaki bir alan adı cihazdaki zararlı alan adı listesiyle eşleşiyor. Bağlantıyı açma.';
+  String get highLinkTitle => 'Bu linke güvenme';
 
   @override
-  String get whyLow => 'NELERE BAKTIK?';
+  String get highNumberTitle => 'Bu numaraya güvenme';
 
   @override
-  String get whyFlagged => 'NEDEN DİKKAT ETMELİSİN?';
+  String get dangerousMessageTitle => 'Bu mesaja cevap verme';
+
+  @override
+  String get dangerousLinkTitle => 'Bu linki açma';
+
+  @override
+  String get dangerousNumberTitle => 'Bu numarayı arama';
+
+  @override
+  String get whyLow => 'KONTROL SONUCU';
+
+  @override
+  String get whyFlagged => 'NEDEN ŞÜPHELİ?';
 
   @override
   String get recommendedActions => 'ŞİMDİ NE YAPMALI?';
@@ -134,137 +151,120 @@ class AppLocalizationsTr extends AppLocalizations {
   String get scanAnother => 'Başka mesaj kontrol et';
 
   @override
-  String get resultDisclaimer =>
-      'Tuzak bir yardımcıdır; gönderenin kimliğini doğrulamaz.';
+  String get noSignalsTitle => 'Ters giden bir şey bulamadık';
 
   @override
-  String get noSignalsTitle => 'Belirgin bir kural eşleşmesi yok';
+  String get urgencyTitle => 'Seni acele ettirmeye çalışıyor';
 
   @override
-  String get noSignalsBody =>
-      'İncelenen metinde etkin kurallarla eşleşen bir risk işareti bulunamadı.';
+  String get credentialsTitle => 'Şifre ya da kart bilgisi istiyor';
 
   @override
-  String get urgencyTitle => 'Acele ettiren ifadeler';
+  String get codeRequestTitle => 'Senden doğrulama kodunu istiyor';
 
   @override
-  String get urgencyBody =>
-      'Hemen işlem yapmanı isteyen dil, düşünmeden karar vermene yol açabilir.';
+  String get paymentTitle => 'Senden para göndermeni istiyor';
 
   @override
-  String get credentialsTitle => 'Şifre veya kod talebi';
+  String get shortLinkTitle => 'Bu link nereye gittiğini gizliyor';
 
   @override
-  String get credentialsBody =>
-      'Mesaj, özel erişim bilgilerini ya da tek kullanımlık kodunu paylaşmanı istiyor.';
+  String get brandTitle => 'Bu marka değil, sadece öyle görünüyor';
 
   @override
-  String get paymentTitle => 'Ödeme talebi';
+  String get domainTitle => 'Bu link güvenilir görünmüyor';
 
   @override
-  String get paymentBody =>
-      'İşlem yapmadan önce ödeme isteğini bağımsız bir resmi kanaldan doğrula.';
+  String get lookalikeTitle => 'Site adı gerçeğine çok benzetilmiş';
 
   @override
-  String get shortLinkTitle => 'Hedefi gizleyen bağlantı';
+  String get riskyTldTitle => 'Link alışılmadık bir uzantı kullanıyor';
 
   @override
-  String get shortLinkBody =>
-      'Kısaltılmış bağlantının son adresi çevrimdışı doğrulanamaz.';
+  String get ipHostTitle => 'Linkte site adı yerine sayı var';
 
   @override
-  String get brandTitle => 'Markayla uyuşmayan alan adı';
+  String get punycodeTitle => 'Linkte taklit harfler olabilir';
 
   @override
-  String get brandBody =>
-      'Mesajdaki marka adıyla bağlantının alan adı, yerel resmi adres listesinde uyuşmuyor.';
+  String get manyHyphensTitle => 'Link gerçek site adını gizliyor';
 
   @override
-  String get domainTitle => 'Şüpheli alan adı';
+  String get longSubdomainTitle => 'Uzun adres gerçek siteyi gizliyor';
 
   @override
-  String get domainBody =>
-      'Bağlantı, kural setinde tanımlanan bir alan adı risk işareti taşıyor.';
+  String get atSignTitle => '@ işaretinden önceki ada aldanma';
 
   @override
-  String get usomTitle => 'Zararlı alan adı eşleşmesi';
+  String get nonHttpsTitle => 'Bu link güvenli bağlantı kullanmıyor';
 
   @override
-  String get usomBody =>
-      'Bir alan adı, cihazda bulunan USOM veri kümesiyle eşleşti.';
+  String get deceptiveDomainTitle => 'Gerçek site adı linkin içine saklanmış';
 
   @override
-  String get genericSignalTitle => 'Dikkat gerektiren ifade';
+  String get usomTitle => 'Bu link daha önce zararlı diye işaretlenmiş';
 
   @override
-  String get genericSignalBody =>
-      'Mesaj, yerel kural setinde tanımlanan bir risk örüntüsüyle eşleşiyor.';
+  String get genericSignalTitle => 'Mesajın dili doğal görünmüyor';
 
   @override
-  String get protectSecretsTitle => 'Kodların ve şifrelerin sende kalsın';
+  String get cargoTitle => 'Sahte bir kargo bildirimi olabilir';
 
   @override
-  String get protectSecretsBody =>
-      'Tek kullanımlık SMS kodunu, kart şifreni veya hesap parolanı kimseyle paylaşma.';
+  String get governmentTitle => 'Resmi kurum gibi konuşuyor';
 
   @override
-  String get officialAppTitle => 'Resmi uygulamadan kontrol et';
+  String get bankCardTitle => 'Banka mesajı gibi görünmeye çalışıyor';
 
   @override
-  String get officialAppBody =>
-      'Şüphen varsa bağlantıya dokunmak yerine kurumun uygulamasını kendin aç.';
+  String get prizeTitle => 'Olmadık bir ödül vadediyor';
 
   @override
-  String get verifyTitle => 'Göndereni bağımsız olarak doğrula';
+  String get easyMoneyTitle => 'Kolay para vadediyor';
 
   @override
-  String get verifyBody =>
-      'Mesajdaki numarayı kullanmadan, kurumun bilinen resmi iletişim kanalından teyit al.';
+  String get familyImpersonationTitle => 'Tanıdığın biri gibi davranıyor';
 
   @override
-  String get doNotTapTitle => 'Bağlantıyı açma, yanıt verme';
+  String get promotionTitle => 'Kampanya bahanesiyle dikkatini çekiyor';
 
   @override
-  String get doNotTapBody =>
-      'Kişisel bilgi paylaşma ve mesaj üzerinden ödeme yapma.';
+  String get protectSecretsTitle => 'Kimseyle kod ya da şifre paylaşma';
 
   @override
-  String get deleteTitle => 'Mesajı sil veya engelle';
+  String get officialAppTitle => 'Şüphen varsa resmi uygulamadan bak';
 
   @override
-  String get deleteBody =>
-      'Gerekli bir bildirim için kanıtı sakladıktan sonra mesajı kaldırabilirsin.';
+  String get verifyTitle => 'Göndereni resmi kanaldan kontrol et';
 
   @override
-  String get contactBankTitle => 'Bilgi paylaştıysan bankana ulaş';
+  String get doNotEngageMessageTitle => 'Cevap yazma, bilgi paylaşma';
 
   @override
-  String get contactBankBody =>
-      'Kartının arkasındaki numarayı veya bankanın resmi uygulamasını kullan.';
+  String get doNotEngageLinkTitle => 'Linke tıklama, cevap yazma';
 
   @override
-  String get emergencyTitle => 'Acil tehlikede 112';
+  String get doNotEngageNumberTitle => 'Bu numarayı arama, cevap yazma';
 
   @override
-  String get emergencyBody =>
-      'Yalnızca acil yardım gerektiren bir durum varsa ara.';
+  String get contactBankTitle => 'Bankanı resmi numaradan ara';
 
   @override
-  String get call => 'Ara';
+  String get callAction => 'Ara';
 
   @override
-  String get callConfirmTitle => 'Telefon uygulaması açılsın mı?';
+  String get bankCallHint =>
+      'Kartının arkasındaki ya da bankanın resmi uygulamasındaki numarayı yaz.';
 
   @override
-  String get callConfirmBody =>
-      '112 yalnızca acil durumlar içindir. Arama telefon uygulamasında devam eder.';
+  String get bankPhoneLabel => 'Bankanın resmi numarası';
 
   @override
-  String get cancel => 'Vazgeç';
+  String get openPhone => 'Telefonu aç';
 
   @override
-  String get callUnavailable =>
-      'Telefon uygulaması açılamadı. Acil durumda telefonundan 112’yi arayabilirsin.';
+  String get phoneUnavailable =>
+      'Telefon açılamadı. Numarayı telefon uygulamandan arayabilirsin.';
 
   @override
   String get clipboardEmpty => 'Panoda yapıştırılabilecek bir metin yok.';
@@ -275,11 +275,49 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get analysisUnavailable =>
-      'Analiz henüz hazır değil. Doğrulanmış kural seti bu sürüme eklenmedi. Aşağıdan örnek sonuçları inceleyebilirsin.';
+      'Kontrol şu an kullanılamıyor. Uygulamayı yeniden başlatıp tekrar dene.';
 
   @override
-  String get analysisFailed =>
-      'Analiz tamamlanamadı. Mesaj için bir risk sonucu üretilmedi. Lütfen yeniden dene.';
+  String get threatCheckComplete =>
+      'Alan adları resmi kayıtlarla karşılaştırıldı.';
+
+  @override
+  String get threatCheckPartial =>
+      'Bazı alan adları resmi kayıtlarla karşılaştırıldı; diğerleri yerel olarak incelendi.';
+
+  @override
+  String get threatCheckLocal => 'Yalnızca yerel analiz kullanıldı.';
+
+  @override
+  String get threatCheckUnavailable =>
+      'Resmi kayıt kontrolü tamamlanamadı; yalnızca yerel analiz kullanıldı.';
+
+  @override
+  String get limitedCheckLabel => 'Kontrol yarım kaldı';
+
+  @override
+  String get limitedCheckTitle => 'Linki tam kontrol edemedik';
+
+  @override
+  String get officialThreatBankTitle =>
+      'Bu adres banka dolandırıcılığı kayıtlarında var';
+
+  @override
+  String get officialThreatPhishingTitle =>
+      'Bu adres oltalama kayıtlarında var';
+
+  @override
+  String get officialThreatMalwareTitle =>
+      'Bu adres zararlı yazılım kayıtlarında var';
+
+  @override
+  String get officialThreatTitle => 'Bu adres tehdit kayıtlarında var';
+
+  @override
+  String get officialCleanTitle => 'Kayıtlarda sorun görünmüyor';
+
+  @override
+  String get analysisFailed => 'Kontrol tamamlanamadı. Lütfen yeniden dene.';
 
   @override
   String get inputTooLong =>
@@ -301,56 +339,33 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get infoDescription =>
-      'Tuzak, mesajlardaki dolandırıcılık işaretlerini anlamana yardımcı olmak için tasarlandı.';
+      'Tuzak, şüpheli mesajları anlamana yardımcı olur.';
 
   @override
   String get privacyTitle => 'Özel olan, özel kalır';
 
   @override
   String get privacyBody =>
-      'Mesajlar sunucuya gönderilmez. Hesap, analiz geçmişi, reklam veya analitik takibi yoktur. İşlem bitince mesaj bellekte tutulmaz.';
+      'Mesaj içeriği cihazınızdan çıkmaz; yalnızca bağlantılar ve telefon numaraları güvenlik kontrolü için T.C. Siber Güvenlik Başkanlığı\'na sorgulanır. Mesaj geçmişi kaydedilmez.';
 
   @override
-  String get sourcesTitle => 'Yerel kurallar, açık sınırlar';
+  String get sourcesTitle => 'Neler kontrol edilir?';
 
   @override
   String get sourcesBody =>
-      'Analiz; metin kuralları, resmi marka adresleri ve yerel zararlı alan adı listesiyle çalışacak. Kaynaklar eklenmeden gerçek analiz etkinleştirilmez. Liste eşleşmesi bulunmaması bir adresin güvenli olduğunu kanıtlamaz.';
+      'Mesaj cihazda incelenir. İnternet varsa bağlantılar ve telefon numaraları resmi tehdit kayıtlarında da sorgulanır. Sonuç güvenlik garantisi değildir.';
 
   @override
   String get shareTitle => 'Paylaşarak kontrol et';
 
   @override
-  String get shareBody =>
-      'iPhone’da metin paylaşımını destekleyen bir uygulamada Paylaş → Tuzak’ı seç. Ardından Tuzak’ı aç. Aktarılan metin bir kez okunur ve geçici kopyası silinir; bekleyen içerik en fazla 10 dakika geçerlidir.';
+  String get shareBody => 'iPhone’da mesajı seçip Paylaş → Tuzak yolunu izle.';
 
   @override
-  String get sharePreviewBody =>
-      'Paylaşarak metin alma özelliği iOS içindir. Bu önizlemede mesajı kopyalayıp yapıştırabilirsin.';
-
-  @override
-  String get ruleVersion => 'Kural seti';
-
-  @override
-  String get brandVersion => 'Marka listesi';
-
-  @override
-  String get usomVersion => 'USOM listesi';
-
-  @override
-  String get pending => 'Henüz eklenmedi';
-
-  @override
-  String get unavailable => 'Yüklenemedi';
-
-  @override
-  String get version => 'Sürüm 0.1.0 · Önizleme';
+  String get sharePreviewBody => 'Mesajı kopyalayıp kontrol ekranına yapıştır.';
 
   @override
   String get licenses => 'Açık kaynak lisansları';
-
-  @override
-  String get localAnalysis => 'YEREL ANALİZ';
 
   @override
   String characterCount(int count) {

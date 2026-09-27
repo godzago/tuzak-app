@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../core/theme/app_theme.dart';
+import '../../../../core/widgets/clay_surface.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../domain/engine/rule_engine.dart';
 
@@ -18,18 +19,7 @@ class MessageInputCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final s = AppLocalizations.of(context);
     return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(22),
-        border: Border.all(color: const Color(0xFFE2E7F0)),
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.ink.withValues(alpha: 0.025),
-            blurRadius: 20,
-            offset: const Offset(0, 8),
-          ),
-        ],
-      ),
+      decoration: ClaySurface.decoration(),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -76,11 +66,6 @@ class MessageInputCard extends StatelessWidget {
             ).textTheme.bodyLarge?.copyWith(color: AppColors.ink),
             decoration: InputDecoration(
               hintText: s.messageHint,
-              hintStyle: const TextStyle(
-                color: Color(0xFF8C9AAE),
-                height: 1.7,
-                fontSize: 15,
-              ),
               contentPadding: const EdgeInsets.fromLTRB(20, 0, 20, 16),
               border: InputBorder.none,
               counterText: '',

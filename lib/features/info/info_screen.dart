@@ -3,20 +3,13 @@ import '../../core/theme/app_theme.dart';
 import '../../core/widgets/app_scaffold.dart';
 import '../../core/widgets/cards.dart';
 import '../../l10n/app_localizations.dart';
-import '../analysis/domain/models/rule_set.dart';
 import '../sharing/incoming_share_service.dart';
 
 class InfoScreen extends StatelessWidget {
-  const InfoScreen({super.key, required this.rules});
-  final RuleSet? rules;
+  const InfoScreen({super.key});
   @override
   Widget build(BuildContext context) {
     final s = AppLocalizations.of(context);
-    String version(String? value) => value == null
-        ? s.unavailable
-        : value == 'pending'
-        ? s.pending
-        : value;
     return AppScaffold(
       header: AppHeader(
         title: s.infoTitle,
@@ -60,34 +53,6 @@ class InfoScreen extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 24),
-          InfoListCard(
-            children: [
-              for (final row in [
-                (s.ruleVersion, rules?.version),
-                (s.brandVersion, rules?.brandVersion),
-                (s.usomVersion, rules?.usomVersion),
-              ])
-                Padding(
-                  padding: const EdgeInsets.all(18),
-                  child: Wrap(
-                    alignment: WrapAlignment.spaceBetween,
-                    spacing: 18,
-                    runSpacing: 6,
-                    children: [
-                      Text(
-                        row.$1,
-                        style: Theme.of(context).textTheme.titleMedium,
-                      ),
-                      Text(
-                        version(row.$2),
-                        style: Theme.of(context).textTheme.bodyMedium,
-                      ),
-                    ],
-                  ),
-                ),
-            ],
-          ),
           const SizedBox(height: 20),
           TextButton(
             onPressed: () => showLicensePage(
@@ -96,11 +61,6 @@ class InfoScreen extends StatelessWidget {
               applicationVersion: '0.1.0',
             ),
             child: Text(s.licenses),
-          ),
-          Text(
-            s.version,
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.bodySmall,
           ),
         ],
       ),

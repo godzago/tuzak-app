@@ -71,14 +71,18 @@ void main() {
     );
     expect(() => engine.analyze('a' * 10001), throwsA(isA<InvalidMessage>()));
   });
-  test('bundled placeholder does not analyze real input', () async {
-    final rules = await RuleRepository().load();
-    expect(rules.ready, isFalse);
-    expect(
-      () => RuleEngine(rules).analyze('hello'),
-      throwsA(isA<RulesUnavailable>()),
-    );
-  });
+  test(
+    'bundled rules analyze without treating placeholder USOM as real',
+    () async {
+      final rules = await RuleRepository().load();
+      expect(rules.ready, isTrue);
+      expect(rules.usomAvailable, isFalse);
+      expect(rules.domainHashes, isEmpty);
+      final result = RuleEngine(rules).analyze('hello');
+      expect(result.level, RiskLevel.low);
+      expect(result.usomChecked, isFalse);
+    },
+  );
   test('bad thresholds rejected', () {
     final data = fixtureRules;
     data['thresholds'] = {'suspicious': 0.7, 'high': 0.6};
@@ -111,6 +115,14 @@ void main() {
       throwsFormatException,
     );
   });
+  test('local rules cannot manufacture a verified official threat reason', () {
+    final data = fixtureRules;
+    (data['rules'] as List).first['reason'] = 'officialThreat';
+    expect(
+      () => RuleSet.fromJson(data, fixtureBrands, fixtureUsom),
+      throwsFormatException,
+    );
+  });
   test('pending USOM prevents claiming complete analysis', () {
     final usom = fixtureUsom..['status'] = 'pending';
     final rules = RuleSet.fromJson(fixtureRules, fixtureBrands, usom);
@@ -126,5 +138,85 @@ void main() {
     expect(entities.ibans, hasLength(1));
     expect(entities.phones, hasLength(1));
     expect(entities.amounts, ['125,50 TL']);
+  });
+  test('common Turkish phone formats are all extracted', () {
+    final entities = const EntityExtractor().extract(
+      '+90 532 123 45 67, 0(533) 123-45-67, 0534.123.45.67',
+    );
+    expect(entities.phones, [
+      '+90 532 123 45 67',
+      '0(533) 123-45-67',
+      '0534.123.45.67',
+    ]);
+  });
+  test('bare IPv4 addresses are treated as checkable link entities', () {
+    final entities = const EntityExtractor().extract('192.0.2.42');
+    expect(entities.hosts, {'192.0.2.42'});
+    expect(entities.urls, hasLength(1));
+    expect(entities.urls.single.host, '192.0.2.42');
+  });
+  test('malformed IPv4-looking text is not accepted as a host', () {
+    final entities = const EntityExtractor().extract('999.2.3.4');
+    expect(entities.hosts, isEmpty);
+    expect(entities.urls, isEmpty);
+  });
+  test('requested malformed and unusual inputs stay deterministic', () async {
+    final bundled = RuleEngine(await RuleRepository().load());
+    for (final input in [
+      '😀🛡️',
+      'Bugün hava güzel.',
+      '<script>alert(1)</script>',
+    ]) {
+      final result = bundled.analyze(input);
+      expect(result.level, RiskLevel.low, reason: input);
+      expect(result.reasons, [ReasonCode.noSignals], reason: input);
+    }
+
+    for (final input in ['http://', 'https:///broken']) {
+      final result = bundled.analyze(input);
+      expect(result.level, RiskLevel.low, reason: input);
+      expect(result.checkedEntity, CheckedEntity.message, reason: input);
+    }
+
+    final schemeless = bundled.analyze('ptt-kargo.xyz/takip');
+    expect(schemeless.level, isNot(RiskLevel.low));
+    expect(schemeless.checkedEntity, CheckedEntity.link);
+
+    final rawIp = bundled.analyze('192.0.2.42');
+    expect(rawIp.level, RiskLevel.suspicious);
+    expect(rawIp.reasons, contains(ReasonCode.ipHost));
+
+    final invalidIban = bundled.analyze('TR00 0000 0000 0000 0000 0000 00');
+    expect(invalidIban.level, RiskLevel.low);
+    expect(
+      const EntityExtractor().extract('TR00 0000 0000 0000 0000 0000 00').ibans,
+      hasLength(1),
+    );
+
+    final mixed = bundled.analyze('Merhaba مرحبا hello 👋');
+    expect(mixed.level, RiskLevel.low);
+
+    final fiveUrls = const EntityExtractor().extract(
+      'a.example b.example c.example d.example e.example',
+    );
+    expect(fiveUrls.urls, hasLength(5));
+
+    expect(bundled.analyze('a' * 10000).level, RiskLevel.low);
+    expect(() => bundled.analyze('a' * 10001), throwsA(isA<InvalidMessage>()));
+  });
+  test('result records the kind of entity checked', () {
+    expect(engine.analyze('Merhaba').checkedEntity, CheckedEntity.message);
+    expect(
+      engine.analyze('https://testmarka.test').checkedEntity,
+      CheckedEntity.link,
+    );
+    expect(
+      engine.analyze('0532 123 45 67').checkedEntity,
+      CheckedEntity.number,
+    );
+    expect(
+      engine.analyze('0532 123 45 67 https://testmarka.test').checkedEntity,
+      CheckedEntity.message,
+    );
   });
 }

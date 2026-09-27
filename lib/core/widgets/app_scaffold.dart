@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../../l10n/app_localizations.dart';
 import '../theme/app_theme.dart';
+import 'cards.dart';
 
 class AppScaffold extends StatelessWidget {
   const AppScaffold({super.key, required this.child, this.header, this.footer});
@@ -9,36 +11,47 @@ class AppScaffold extends StatelessWidget {
   final Widget? footer;
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-    body: DecoratedBox(
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [Color(0xFFF5F6FB), AppColors.background, Color(0xFFE9EEF6)],
+  Widget build(BuildContext context) => AnnotatedRegion<SystemUiOverlayStyle>(
+    value: SystemUiOverlayStyle.dark.copyWith(
+      statusBarColor: Colors.transparent,
+      systemNavigationBarColor: AppColors.background,
+      systemNavigationBarIconBrightness: Brightness.dark,
+    ),
+    child: Scaffold(
+      body: DecoratedBox(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Color(0xFFF5F3FF),
+              AppColors.background,
+              Color(0xFFE9E7F8),
+            ],
+          ),
         ),
-      ),
-      child: SafeArea(
-        child: Center(
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 520),
-            child: Column(
-              children: [
-                ?header,
-                Expanded(
-                  child: SingleChildScrollView(
-                    keyboardDismissBehavior:
-                        ScrollViewKeyboardDismissBehavior.onDrag,
-                    padding: const EdgeInsets.fromLTRB(24, 12, 24, 28),
-                    child: child,
+        child: SafeArea(
+          child: Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 520),
+              child: Column(
+                children: [
+                  ?header,
+                  Expanded(
+                    child: SingleChildScrollView(
+                      keyboardDismissBehavior:
+                          ScrollViewKeyboardDismissBehavior.onDrag,
+                      padding: const EdgeInsets.fromLTRB(24, 12, 24, 28),
+                      child: child,
+                    ),
                   ),
-                ),
-                if (footer != null)
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(24, 12, 24, 20),
-                    child: footer!,
-                  ),
-              ],
+                  if (footer != null)
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(24, 12, 24, 20),
+                      child: footer!,
+                    ),
+                ],
+              ),
             ),
           ),
         ),
@@ -76,11 +89,7 @@ class AppHeader extends StatelessWidget {
             width: 34,
             height: 38,
             margin: const EdgeInsets.only(left: 8, right: 10),
-            child: const Icon(
-              Icons.shield_outlined,
-              color: AppColors.ink,
-              size: 28,
-            ),
+            child: const IconBadge(icon: Icons.shield_rounded, size: 34),
           ),
         Expanded(
           child: Text(

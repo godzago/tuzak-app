@@ -28,8 +28,11 @@ Cihazda doğrula:
 - Boş metin, URL, Unicode, çok uzun metin, iptal ve arka arkaya paylaşımlar.
 - Süresi dolmuş içeriğin alınmaması; aynı içeriğin ikinci kez gelmemesi.
 - Mesajlar/WhatsApp/Mail'in seçilen içerik için metin paylaşımını sunması.
-- Uçak modunda ilk açılış, Inter fontu, VoiceOver ve büyük yazı.
+- Uçak modunda ilk açılış, yerel Poppins fontu, VoiceOver ve büyük yazı.
+- Ağ bağlantısı olmadığında kısa bildirim ve çalışan yerel analiz; internet
+  geldiğinde yeni kontrolde resmi API sorgusu. Wi-Fi varken API erişilemiyorsa
+  teknik hata yerine yerel/kısmi kontrol notu.
 - 112 aksiyonunun yalnızca açık kullanıcı onayıyla telefon uygulamasına geçmesi.
 
-Uygulama gerçek kural seti olmadan önizleme olarak kalır. App Store yayın öncesi
+Kural dosyaları yüklenemezse mesaj kontrolü kullanılamaz. App Store yayın öncesi
 kurallar, kaynak güncelliği, imzalama, gizlilik beyanı ve cihaz testleri tamamlanmalıdır.

@@ -1,6 +1,6 @@
 import 'analysis_result.dart';
 
-enum MatchKind { contains, regex, host, tld, brandMismatch }
+enum MatchKind { contains, regex, host, tld, brandMismatch, urlSignal }
 
 class AnalysisRule {
   AnalysisRule({
@@ -9,6 +9,7 @@ class AnalysisRule {
     required this.weight,
     required this.kind,
     required this.patterns,
+    this.why,
   }) : regexes = kind == MatchKind.regex
            ? patterns.map((p) => RegExp(p, caseSensitive: false)).toList()
            : const [];
@@ -19,12 +20,41 @@ class AnalysisRule {
   final MatchKind kind;
   final List<String> patterns;
   final List<RegExp> regexes;
+  final String? why;
 }
 
 class Brand {
-  const Brand(this.aliases, this.domains);
+  const Brand(this.aliases, this.domains, {this.hostTokens = const []});
   final List<String> aliases;
   final List<String> domains;
+  final List<String> hostTokens;
+}
+
+class UrlPolicy {
+  const UrlPolicy({
+    required this.twoLevelSuffixes,
+    required this.shorteners,
+    required this.riskyTlds,
+    required this.minHyphens,
+    required this.minSubdomainLabels,
+    required this.minSubdomainCharacters,
+    required this.minLookalikeLength,
+    required this.maxLookalikeDistance,
+    this.compoundAffixes = const [],
+    this.embeddedDomainSuffixes = const [],
+    this.deceptiveMinLabels = 3,
+  });
+  final List<String> twoLevelSuffixes;
+  final List<String> shorteners;
+  final List<String> riskyTlds;
+  final int minHyphens;
+  final int minSubdomainLabels;
+  final int minSubdomainCharacters;
+  final int minLookalikeLength;
+  final int maxLookalikeDistance;
+  final List<String> compoundAffixes;
+  final List<String> embeddedDomainSuffixes;
+  final int deceptiveMinLabels;
 }
 
 class RuleSet {
@@ -38,6 +68,8 @@ class RuleSet {
     required this.rules,
     required this.brands,
     required this.domainHashes,
+    this.usomAvailable = true,
+    this.urlPolicy,
   });
 
   final String version;
@@ -49,6 +81,8 @@ class RuleSet {
   final List<AnalysisRule> rules;
   final List<Brand> brands;
   final Set<String> domainHashes;
+  final bool usomAvailable;
+  final UrlPolicy? urlPolicy;
 
   factory RuleSet.fromJson(
     Map<String, dynamic> rulesData,
@@ -88,6 +122,7 @@ class RuleSet {
           weight > 1 ||
           reason == ReasonCode.noSignals ||
           reason == ReasonCode.usom ||
+          reason == ReasonCode.officialThreat ||
           (kind != MatchKind.brandMismatch && patterns.isEmpty) ||
           patterns.any((p) => p.trim().isEmpty || p.length > 512)) {
         throw const FormatException('Invalid analysis rule');

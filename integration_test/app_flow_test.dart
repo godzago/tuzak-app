@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:tuzak/main.dart' as app;
@@ -6,22 +7,45 @@ import 'package:tuzak/features/analysis/presentation/screens/result_screen.dart'
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
-  testWidgets('offline preview round trip on a device', (tester) async {
+  testWidgets('splash, home, offline analysis and return on a device', (
+    tester,
+  ) async {
     await app.main();
+    await tester.pump();
+    await tester.pump(const Duration(seconds: 2));
     await tester.pumpAndSettle();
+    final start = find.byKey(const Key('startCheck'));
+    await tester.ensureVisible(start);
+    await tester.tap(start);
+    await tester.pumpAndSettle();
+    const clipboardMessage = 'Panodan gelen cihaz testi';
+    await Clipboard.setData(const ClipboardData(text: clipboardMessage));
+    await tester.tap(find.text('Yapıştır'));
+    await tester.pumpAndSettle();
+    expect(
+      tester
+          .widget<TextField>(find.byKey(const Key('messageInput')))
+          .controller!
+          .text,
+      clipboardMessage,
+    );
     await tester.enterText(
       find.byKey(const Key('messageInput')),
-      'Örnek mesaj',
+      'PTT: Son uyarı! Şifrenizi gönderin: https://ptt-islem.example',
     );
     await tester.testTextInput.receiveAction(TextInputAction.done);
     FocusManager.instance.primaryFocus?.unfocus();
     await tester.pumpAndSettle();
-    final preview = find.byKey(const Key('preview-high'));
-    await tester.ensureVisible(preview);
-    await tester.tap(preview);
+    final check = find.byKey(const Key('checkButton'));
+    await tester.ensureVisible(check);
+    await tester.tap(check);
     await tester.pumpAndSettle();
     expect(find.byType(ResultScreen), findsOneWidget);
-    expect(find.textContaining('mesajın analiz edilmedi'), findsOneWidget);
+    expect(find.textContaining('mesajın analiz edilmedi'), findsNothing);
+    expect(
+      tester.widget<ResultScreen>(find.byType(ResultScreen)).result.level.name,
+      'high',
+    );
     await tester.tap(find.byTooltip('Geri'));
     await tester.pumpAndSettle();
     expect(

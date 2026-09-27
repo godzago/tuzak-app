@@ -22,58 +22,60 @@ extension RiskPresentation on RiskLevel {
     RiskLevel.high => s.highLabel,
     RiskLevel.dangerous => s.dangerousLabel,
   };
-  String title(AppLocalizations s) => switch (this) {
-    RiskLevel.low => s.lowTitle,
-    RiskLevel.suspicious => s.suspiciousTitle,
-    RiskLevel.high => s.highTitle,
-    RiskLevel.dangerous => s.dangerousTitle,
-  };
-  String description(AppLocalizations s) => switch (this) {
-    RiskLevel.low => s.lowDescription,
-    RiskLevel.suspicious => s.suspiciousDescription,
-    RiskLevel.high => s.highDescription,
-    RiskLevel.dangerous => s.dangerousDescription,
-  };
 }
 
 extension ReasonPresentation on ReasonCode {
-  (String, String, IconData) content(AppLocalizations s) => switch (this) {
-    ReasonCode.noSignals => (
-      s.noSignalsTitle,
-      s.noSignalsBody,
-      Icons.check_rounded,
+  (String, IconData) content(AppLocalizations s) => switch (this) {
+    ReasonCode.noSignals => (s.noSignalsTitle, Icons.check_rounded),
+    ReasonCode.urgency => (s.urgencyTitle, Icons.timer_outlined),
+    ReasonCode.credentials => (s.credentialsTitle, Icons.key_rounded),
+    ReasonCode.codeRequest => (s.codeRequestTitle, Icons.password_rounded),
+    ReasonCode.payment => (s.paymentTitle, Icons.credit_card_outlined),
+    ReasonCode.shortLink => (s.shortLinkTitle, Icons.link_rounded),
+    ReasonCode.brandMismatch => (s.brandTitle, Icons.link_off_rounded),
+    ReasonCode.suspiciousDomain => (s.domainTitle, Icons.language_rounded),
+    ReasonCode.lookalike => (s.lookalikeTitle, Icons.copy_rounded),
+    ReasonCode.riskyTld => (s.riskyTldTitle, Icons.public_off_outlined),
+    ReasonCode.ipHost => (s.ipHostTitle, Icons.numbers_rounded),
+    ReasonCode.punycode => (s.punycodeTitle, Icons.translate_rounded),
+    ReasonCode.manyHyphens => (s.manyHyphensTitle, Icons.link_off_rounded),
+    ReasonCode.longSubdomain => (
+      s.longSubdomainTitle,
+      Icons.account_tree_outlined,
     ),
-    ReasonCode.urgency => (s.urgencyTitle, s.urgencyBody, Icons.timer_outlined),
-    ReasonCode.credentials => (
-      s.credentialsTitle,
-      s.credentialsBody,
-      Icons.key_rounded,
-    ),
-    ReasonCode.payment => (
-      s.paymentTitle,
-      s.paymentBody,
-      Icons.credit_card_outlined,
-    ),
-    ReasonCode.shortLink => (
-      s.shortLinkTitle,
-      s.shortLinkBody,
-      Icons.link_rounded,
-    ),
-    ReasonCode.brandMismatch => (
-      s.brandTitle,
-      s.brandBody,
-      Icons.link_off_rounded,
-    ),
-    ReasonCode.suspiciousDomain => (
-      s.domainTitle,
-      s.domainBody,
+    ReasonCode.atSign => (s.atSignTitle, Icons.alternate_email_rounded),
+    ReasonCode.nonHttps => (s.nonHttpsTitle, Icons.lock_open_rounded),
+    ReasonCode.deceptiveSubdomain => (
+      s.deceptiveDomainTitle,
       Icons.language_rounded,
     ),
-    ReasonCode.usom => (s.usomTitle, s.usomBody, Icons.gpp_bad_outlined),
-    ReasonCode.generic => (
-      s.genericSignalTitle,
-      s.genericSignalBody,
-      Icons.info_outline_rounded,
+    ReasonCode.usom => (s.usomTitle, Icons.gpp_bad_outlined),
+    ReasonCode.officialThreat => (
+      s.officialThreatTitle,
+      Icons.gpp_bad_outlined,
     ),
+    ReasonCode.officialClean => (s.officialCleanTitle, Icons.verified_outlined),
+    ReasonCode.generic => (s.genericSignalTitle, Icons.info_outline_rounded),
+    ReasonCode.cargo => (s.cargoTitle, Icons.local_shipping_outlined),
+    ReasonCode.government => (
+      s.governmentTitle,
+      Icons.account_balance_outlined,
+    ),
+    ReasonCode.bankCard => (s.bankCardTitle, Icons.credit_card_outlined),
+    ReasonCode.prize => (s.prizeTitle, Icons.card_giftcard_rounded),
+    ReasonCode.easyMoney => (s.easyMoneyTitle, Icons.paid_outlined),
+    ReasonCode.familyImpersonation => (
+      s.familyImpersonationTitle,
+      Icons.people_outline_rounded,
+    ),
+    ReasonCode.promotion => (s.promotionTitle, Icons.campaign_outlined),
   };
 }
+
+String officialThreatTitle(String? category, AppLocalizations s) =>
+    switch (category) {
+      'BP' => s.officialThreatBankTitle,
+      'PH' => s.officialThreatPhishingTitle,
+      'MD' => s.officialThreatMalwareTitle,
+      _ => s.officialThreatTitle,
+    };

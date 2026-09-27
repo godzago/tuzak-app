@@ -1,16 +1,46 @@
 # Yerel veri sözleşmesi
 
-Bu, motorun ilk sürümündeki **geçici entegrasyon şemasıdır**. Asıl `rules.json`
-ve `test_cases.json` henüz sağlanmadı. Geldiklerinde adaptör ve regresyon testleri
-o dosyalara göre güncellenmelidir. Buradaki sentetik ağırlıklar ürün önerisi değildir.
+## Etkin veri formatı
+
+Hazırlanan `../assets/rules.json`, `text_categories`, `url_signals` ve gömülü
+`brands` alanlarını içerir. `python tool/sync_analysis_assets.py` ile Flutter'ın
+`assets/data/` klasörüne kopyalanır. `asset_rule_adapter.dart` yeni şemayı okur;
+21 sinyal, noisy-OR, `<0.25 / 0.25..0.60 / >0.60` eşikleri ve en güçlü üç farklı
+gerekçe uygulanır. Resmi adres yalnız kendi marka taklidi/benzerliği sinyalini
+bastırır; diğer sinyalleri veya başka bir şüpheli bağlantıyı temizlemez.
+
+Yeni USOM şeması `version`, UTC `generated`, SHA-256 hex listesi `entries`
+alanlarından oluşur. Placeholder/yerel-doğrulanmamış/eksik/bozuk USOM yerel metin
+ve URL analizini kapatmaz; `usomAvailable` / `usomChecked` false olur. Sahte hash'ler yalnız test adaptöründeki
+`allowSyntheticUsom` seçeneğiyle kullanılabilir. Canlı indirme halen kapalıdır.
+
+Yerel sonuçtan sonra ayrı bir [resmi API katmanı](threat-api.md) çalışır.
+Arayüzdeki yerel/kısmi/tam kontrol bilgisi bu sorguların sonucunu yansıtır;
+yerel USOM dosyasının kullanılabilirliğiyle karıştırılmaz.
+
+URL'ler orijinal metinden çıkarılır; Türkçe harf katlama yalnız metne uygulanır.
+Unicode hostlar Punycode'a çevrilir; tam IDNA 2003 nameprep desteği henüz yoktur.
+Canlı veri açılmadan önce güncelleme betiğiyle IDN profil eşdeğerliği tamamlanmalıdır.
+IPv4/IPv6, alt alan adı sınırları, `@` kullanıcı bilgisi ve açık HTTP desteklenir.
+URL açma, DNS sorgusu veya kısaltılmış link çözme yapılmaz.
+
+98 hazırlanmış senaryo `test/analysis/authored_assets_test.dart` ile doğrudan
+motorda sınanır. Paket yükleme, USOM placeholder ayrımı ve gerçek analizden sonuç
+ekranına geçiş de test edilir. Yeni veriler için senkronizasyondan sonra Flutter'ı
+durdurup yeniden çalıştırın; hot reload başlangıçtaki veri yüklemesini tekrarlamaz.
+
+## Eski örnek/test formatı
+
+Aşağıdaki şema eski sentetik testler ve boş örneklerle geriye uyumluluk içindir.
+Yeni veri formatında ayrı bir `brands.json` gerekmez.
 
 Public depoda yalnızca `assets/data/*.example.json` bulunur. Bunların `pending`
-durumu gerçek analizi kapatır; arayüz örneklerini açar. Özel veri dosyaları
+durumu gerçek analizi kapatır; sahte sonuç gösterilmez. Özel veri dosyaları
 `.gitignore` ile dışarıda tutulur. Flutter, yerelde mevcut olan gerçek JSON
 dosyalarını `assets/data/` dizininden uygulamaya paketler. Uygulamaya paketlenmiş
 veriler tersine mühendislikle okunabilir; API anahtarları bu dizine konulmamalıdır.
 
-## rules.json
+### Eski rules.json
 
 ```json
 {
@@ -43,7 +73,7 @@ veriler tersine mühendislikle okunabilir; API anahtarları bu dizine konulmamal
 - En güçlü üç farklı gerekçe gösterilir. USOM eşleşmesi tehlikeli seviyesini geçersiz
   kılınamaz biçimde seçer ve ilk gerekçedir.
 
-## brands.json
+### Eski brands.json
 
 ```json
 {"schemaVersion":1,"version":"your-version","status":"ready","brands":[
@@ -51,7 +81,7 @@ veriler tersine mühendislikle okunabilir; API anahtarları bu dizine konulmamal
 ]}
 ```
 
-## usom.json
+### Eski usom.json
 
 ```json
 {"schemaVersion":1,"version":"your-version","status":"ready",
@@ -63,13 +93,32 @@ Hash girdisi protokol/yol/port içermeyen küçük harfli, sondaki noktası kald
 Alt alan adına otomatik yayılım yoktur. IDN/punycode ve alan adı benzerliği için
 üretim veri sözleşmesi henüz belirlenmedi; bu sürüm bunları doğruladığını iddia etmez.
 
-Üç dosyanın da `ready` olması ve kuralların boş olmaması gerekir. Eksik/bozuk
+Yalnız eski şemada üç dosyanın da `ready` olması ve kuralların boş olmaması gerekir. Eksik/bozuk
 veri hiçbir zaman düşük risk sonucu üretmez. URL'ler açılmaz, DNS sorgusu yapılmaz,
 kısaltılmış bağlantılar çözülmez. Uzaktan güncelleme bu sürümde yoktur.
 
 ## Testler
 
-`test/fixtures/synthetic_cases.json` kişisel veri içermeyen 20 mühendislik
-senaryosudur. Sağlanacak `test_cases.json` veya gerçek mesaj veri seti değildir.
+`test/fixtures/synthetic_cases.json` kişisel veri içermeyen 20 eski mühendislik
+senaryosudur. Yeni `test/fixtures/test_cases.json` 98 hazırlanmış mesaj içerir;
+ikisi kullanıcı tarafından bildirilen açık tehdit kaydındaki alan adını kullanır.
 Yanlış alarm / kaçırma oranları henüz ölçülmemiştir. Gerçek veri setleri
 `private/` altında veya ignore edilmiş `test/fixtures/test_cases.json` yolunda tutulmalıdır.
+
+## 1.1.0 marka ve adres kuralları
+
+Aktif marka listesi ayrı bir `brands.json` yerine `rules.json.brands` içindedir:
+26 Türkiye markasına Apple, iCloud, Google, Microsoft, Meta/Facebook, WhatsApp,
+Netflix, PayPal ve Amazon eklenmiştir (35 kayıt). Resmi alan adı eşleşmesi nokta
+sınırlarıyla yapılır; `.com` gibi bir TLD tek başına güvenilirlik kanıtı değildir.
+
+Marka + sayı + yapılandırılmış ekler (`apple03cloudstore` gibi) tam parçalarla
+eşleştirilir; keyfi alt dize aranmaz (`pineapple`/`appleton` eşleşmez). Bu biçim
+brand_mismatch ve lookalike üretir. Çok uzun sayılı girdilerde regex geri izleme
+riski olmaması için sınırlı dinamik bölümleme kullanılır.
+
+`deceptive_subdomain` marka listesinden bağımsızdır: başka bir gerçek alan adı
+altına yerleştirilmiş `bilinmeyenmarka.com` benzeri yapı veya metinde geçen adı
+tekrarlayan derin, giriş/hesap etiketli alt alan adları için yapısal şüphe üretir.
+Bilinmeyen bir markanın resmi alan adını bildiğini iddia etmez. Derinlik tek
+başına mevcut düşük ağırlıklı `long_subdomain` sinyalidir.

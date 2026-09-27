@@ -1,4 +1,6 @@
 import 'package:flutter/foundation.dart';
+import '../../../../services/threat_api_service.dart';
+import 'threat_enriched_analyzer.dart';
 import '../domain/engine/rule_engine.dart';
 import '../domain/models/analysis_result.dart';
 import '../domain/models/rule_set.dart';
@@ -8,16 +10,32 @@ enum AnalysisFailure { unavailable, invalidInput, failed }
 typedef Analyzer = Future<AnalysisResult> Function(String text);
 
 class AnalysisController extends ChangeNotifier {
-  AnalysisController({required this.analyzeMessage});
+  AnalysisController({required this.analyzeMessage, this._onDispose});
 
-  factory AnalysisController.fromRules(RuleSet? rules) => AnalysisController(
-    analyzeMessage: (text) async {
-      if (rules == null) throw const RulesUnavailable();
-      return compute(_runAnalysis, (rules, text));
-    },
-  );
+  factory AnalysisController.fromRules(
+    RuleSet? rules, {
+    ThreatApiConfig config = const ThreatApiConfig(),
+  }) {
+    final api = ThreatApiService(config: config);
+    final analyzer = ThreatEnrichedAnalyzer(
+      analyzeLocal: (text) async {
+        if (rules == null) throw const RulesUnavailable();
+        return compute(_runAnalysis, (rules, text));
+      },
+      checkDomain: api.checkHost,
+      checkPhone: api.checkPhone,
+    );
+    return AnalysisController(
+      analyzeMessage: analyzer.analyze,
+      onDispose: () {
+        analyzer.dispose();
+        api.dispose();
+      },
+    );
+  }
 
   final Analyzer analyzeMessage;
+  final void Function()? _onDispose;
   bool busy = false;
   AnalysisFailure? failure;
   int _generation = 0;
@@ -70,6 +88,7 @@ class AnalysisController extends ChangeNotifier {
   void dispose() {
     _disposed = true;
     _generation++;
+    _onDispose?.call();
     super.dispose();
   }
 }

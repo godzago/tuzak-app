@@ -1,12 +1,10 @@
-import '../domain/models/analysis_result.dart';
+import 'package:tuzak/features/analysis/domain/models/analysis_result.dart';
 
-// Deliberately separate from the engine. These are labelled UI examples,
-// never the result of evaluating a user's message.
-AnalysisResult previewResult(RiskLevel level) => AnalysisResult(
+// Synthetic results used only to exercise result layouts in tests.
+AnalysisResult sampleResult(RiskLevel level) => AnalysisResult(
   level: level,
   score: 0,
-  rulesVersion: 'preview',
-  isPreview: true,
+  rulesVersion: 'test',
   reasons: switch (level) {
     RiskLevel.low => [ReasonCode.noSignals],
     RiskLevel.suspicious => [ReasonCode.urgency, ReasonCode.shortLink],

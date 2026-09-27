@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../theme/app_theme.dart';
+import 'clay_surface.dart';
 
 class IconBadge extends StatelessWidget {
   const IconBadge({
@@ -15,11 +16,19 @@ class IconBadge extends StatelessWidget {
   Widget build(BuildContext context) => Container(
     width: size,
     height: size,
-    decoration: BoxDecoration(
-      color: color.withValues(alpha: 0.08),
-      shape: BoxShape.circle,
+    decoration: ClaySurface.decoration(
+      color: Color.lerp(Colors.white, color, .18)!,
+      radius: size,
     ),
-    child: Icon(icon, size: size * 0.49, color: color),
+    child: Icon(
+      icon,
+      size: size * 0.49,
+      color: color,
+      shadows: const [
+        Shadow(color: Colors.white, offset: Offset(-1, -1), blurRadius: 1),
+        Shadow(color: Color(0x25766BA8), offset: Offset(1, 2), blurRadius: 2),
+      ],
+    ),
   );
 }
 
@@ -37,19 +46,7 @@ class InfoListCard extends StatelessWidget {
   const InfoListCard({super.key, required this.children});
   final List<Widget> children;
   @override
-  Widget build(BuildContext context) => Container(
-    decoration: BoxDecoration(
-      color: Colors.white,
-      borderRadius: BorderRadius.circular(20),
-      border: Border.all(color: Colors.white),
-      boxShadow: [
-        BoxShadow(
-          color: AppColors.ink.withValues(alpha: 0.025),
-          blurRadius: 20,
-          offset: const Offset(0, 6),
-        ),
-      ],
-    ),
+  Widget build(BuildContext context) => ClaySurface(
     child: Column(
       children: [
         for (var i = 0; i < children.length; i++) ...[
@@ -69,12 +66,12 @@ class InfoListTile extends StatelessWidget {
   const InfoListTile({
     super.key,
     required this.title,
-    required this.body,
     required this.leading,
+    this.body,
     this.trailing,
   });
   final String title;
-  final String body;
+  final String? body;
   final Widget leading;
   final Widget? trailing;
   @override
@@ -90,16 +87,14 @@ class InfoListTile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(title, style: Theme.of(context).textTheme.titleMedium),
-              const SizedBox(height: 5),
-              Text(body, style: Theme.of(context).textTheme.bodyMedium),
-              if (trailing != null)
-                Padding(
-                  padding: const EdgeInsets.only(top: 10),
-                  child: trailing,
-                ),
+              if (body != null && body!.isNotEmpty) ...[
+                const SizedBox(height: 5),
+                Text(body!, style: Theme.of(context).textTheme.bodyMedium),
+              ],
             ],
           ),
         ),
+        if (trailing != null) ...[const SizedBox(width: 10), trailing!],
       ],
     ),
   );

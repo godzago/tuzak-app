@@ -4,6 +4,7 @@ import '../models/analysis_result.dart';
 import '../models/rule_set.dart';
 import 'entity_extractor.dart';
 import 'message_normalizer.dart';
+import 'url_signals.dart';
 
 class RuleEngine {
   const RuleEngine(this.rules);
@@ -18,14 +19,20 @@ class RuleEngine {
     final text = normalizeMessage(message);
     if (text.isEmpty) throw const InvalidMessage();
     final entities = const EntityExtractor().extract(message);
-    final usomMatch = entities.hosts.any(
-      (host) => rules.domainHashes.contains(
-        sha256.convert(utf8.encode(host)).toString(),
-      ),
-    );
+    final usomMatch =
+        rules.usomAvailable &&
+        entities.hosts.any(
+          (host) => rules.domainHashes.contains(
+            sha256.convert(utf8.encode(host)).toString(),
+          ),
+        );
     final signals = <RiskSignal>[];
+    final urlSignals = rules.urlPolicy == null
+        ? const <String>{}
+        : detectUrlSignals(entities, rules);
     for (final rule in rules.rules) {
       final matched = switch (rule.kind) {
+        MatchKind.urlSignal => urlSignals.contains(rule.id),
         MatchKind.contains => rule.patterns.any(
           (p) => text.contains(normalizeMessage(p)),
         ),
@@ -51,7 +58,12 @@ class RuleEngine {
       // A rule contributes at most once, regardless of repeated words or links.
       if (matched) {
         signals.add(
-          RiskSignal(id: rule.id, reason: rule.reason, score: rule.weight),
+          RiskSignal(
+            id: rule.id,
+            reason: rule.reason,
+            score: rule.weight,
+            why: rule.why,
+          ),
         );
       }
     }
@@ -83,6 +95,19 @@ class RuleEngine {
           ? [ReasonCode.noSignals]
           : reasons.take(3).toList(),
       rulesVersion: rules.version,
+      usomChecked: rules.usomAvailable,
+      checkedEntity: entities.hosts.isNotEmpty && entities.phones.isEmpty
+          ? CheckedEntity.link
+          : entities.phones.isNotEmpty && entities.hosts.isEmpty
+          ? CheckedEntity.number
+          : CheckedEntity.message,
+      reasonDescriptions: {
+        for (final reason in reasons)
+          if (signals.any((s) => s.reason == reason && s.why != null))
+            reason: signals
+                .firstWhere((s) => s.reason == reason && s.why != null)
+                .why!,
+      },
     );
   }
 

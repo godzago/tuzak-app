@@ -1,49 +1,35 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/widgets/app_scaffold.dart';
 import '../../../../core/widgets/buttons.dart';
 import '../../../../core/widgets/cards.dart';
+import '../../../../core/widgets/clay_surface.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../domain/models/analysis_result.dart';
 import '../result_presentation.dart';
 import '../widgets/result_badge.dart';
+import '../widgets/bank_call_sheet.dart';
 
 class ResultScreen extends StatelessWidget {
   const ResultScreen({super.key, required this.result});
   final AnalysisResult result;
 
-  Future<void> _call(BuildContext context) async {
-    final s = AppLocalizations.of(context);
-    final confirmed = await showDialog<bool>(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text(s.callConfirmTitle),
-        content: Text(s.callConfirmBody),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context, false),
-            child: Text(s.cancel),
-          ),
-          TextButton(
-            onPressed: () => Navigator.pop(context, true),
-            child: Text(s.call),
-          ),
-        ],
-      ),
-    );
-    if (confirmed != true || !context.mounted) return;
-    var opened = false;
-    try {
-      opened = await launchUrl(Uri(scheme: 'tel', path: '112'));
-    } catch (_) {
-      /* No raw errors logged. */
-    }
-    if (!opened && context.mounted) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text(s.callUnavailable)));
-    }
+  String _title(AppLocalizations s, {required bool incomplete}) {
+    if (incomplete) return s.limitedCheckTitle;
+    return switch ((result.level, result.checkedEntity)) {
+      (RiskLevel.low, CheckedEntity.link) => s.linkCleanTitle,
+      (RiskLevel.low, CheckedEntity.number) => s.numberCleanTitle,
+      (RiskLevel.low, CheckedEntity.message) => s.messageCleanTitle,
+      (RiskLevel.suspicious, CheckedEntity.link) => s.suspiciousLinkTitle,
+      (RiskLevel.suspicious, CheckedEntity.number) => s.suspiciousNumberTitle,
+      (RiskLevel.suspicious, CheckedEntity.message) => s.suspiciousMessageTitle,
+      (RiskLevel.high, CheckedEntity.link) => s.highLinkTitle,
+      (RiskLevel.high, CheckedEntity.number) => s.highNumberTitle,
+      (RiskLevel.high, CheckedEntity.message) => s.highMessageTitle,
+      (RiskLevel.dangerous, CheckedEntity.link) => s.dangerousLinkTitle,
+      (RiskLevel.dangerous, CheckedEntity.number) => s.dangerousNumberTitle,
+      (RiskLevel.dangerous, CheckedEntity.message) => s.dangerousMessageTitle,
+    };
   }
 
   @override
@@ -52,22 +38,25 @@ class ResultScreen extends StatelessWidget {
     final level = result.level;
     final theme = Theme.of(context).textTheme;
     final low = level == RiskLevel.low;
-    final advice = <(String, String, IconData)>[
-      if (low)
-        (
-          s.protectSecretsTitle,
-          s.protectSecretsBody,
-          Icons.lock_outline_rounded,
-        ),
+    final incomplete =
+        low &&
+        result.checkedEntity != CheckedEntity.message &&
+        (result.threatCheck == ThreatCheckStatus.unavailable ||
+            result.threatCheck == ThreatCheckStatus.partial);
+    final doNotEngage = switch (result.checkedEntity) {
+      CheckedEntity.link => s.doNotEngageLinkTitle,
+      CheckedEntity.number => s.doNotEngageNumberTitle,
+      CheckedEntity.message => s.doNotEngageMessageTitle,
+    };
+    final advice = <(String, IconData)>[
+      if (low) (s.protectSecretsTitle, Icons.lock_outline_rounded),
       if (level == RiskLevel.suspicious)
-        (s.verifyTitle, s.verifyBody, Icons.person_search_outlined),
+        (s.verifyTitle, Icons.person_search_outlined),
       if (low || level == RiskLevel.suspicious)
-        (s.officialAppTitle, s.officialAppBody, Icons.open_in_new_rounded),
+        (s.officialAppTitle, Icons.open_in_new_rounded),
       if (level == RiskLevel.high || level == RiskLevel.dangerous) ...[
-        (s.doNotTapTitle, s.doNotTapBody, Icons.block_rounded),
-        if (level == RiskLevel.dangerous)
-          (s.deleteTitle, s.deleteBody, Icons.delete_outline_rounded),
-        (s.contactBankTitle, s.contactBankBody, Icons.account_balance_outlined),
+        (doNotEngage, Icons.block_rounded),
+        (s.contactBankTitle, Icons.account_balance_outlined),
       ],
     ];
     return AppScaffold(
@@ -82,35 +71,39 @@ class ResultScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          if (result.isPreview) ...[
-            NoticeCard(text: '${s.previewLabel} · ${s.previewNotice}'),
-            const SizedBox(height: 24),
-          ] else
-            const SizedBox(height: 12),
+          const SizedBox(height: 12),
           Align(
-            alignment: Alignment.centerLeft,
-            child: IconBadge(icon: level.icon, color: level.color, size: 60),
+            alignment: Alignment.center,
+            child: IconBadge(
+              icon: incomplete ? Icons.help_outline_rounded : level.icon,
+              color: incomplete ? AppColors.muted : level.color,
+              size: 100,
+            ),
           ),
           const SizedBox(height: 20),
           Align(
-            alignment: Alignment.centerLeft,
-            child: ResultBadge(level: level),
+            alignment: Alignment.center,
+            child: ResultBadge(level: level, incomplete: incomplete),
           ),
           const SizedBox(height: 16),
-          Text(level.title(s), style: theme.headlineLarge),
-          const SizedBox(height: 14),
-          Text(level.description(s), style: theme.bodyLarge),
-          const SizedBox(height: 32),
+          Text(
+            _title(s, incomplete: incomplete),
+            style: theme.headlineLarge,
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 24),
           SectionLabel(low ? s.whyLow : s.whyFlagged),
           InfoListCard(
             children: [
               for (final reason in result.reasons)
                 Builder(
                   builder: (context) {
-                    final (title, body, icon) = reason.content(s);
+                    final (defaultTitle, icon) = reason.content(s);
+                    final title = reason == ReasonCode.officialThreat
+                        ? officialThreatTitle(result.threatMatch?.category, s)
+                        : defaultTitle;
                     return InfoListTile(
                       title: title,
-                      body: body,
                       leading: IconBadge(icon: icon, color: level.color),
                     );
                   },
@@ -124,43 +117,42 @@ class ResultScreen extends StatelessWidget {
               for (var i = 0; i < advice.length; i++)
                 InfoListTile(
                   title: advice[i].$1,
-                  body: advice[i].$2,
+                  trailing: advice[i].$1 == s.contactBankTitle
+                      ? Container(
+                          decoration: ClaySurface.decoration(
+                            color: const Color(0xFFF0ECFC),
+                            radius: 30,
+                          ),
+                          child: TextButton(
+                            onPressed: () => showModalBottomSheet<void>(
+                              context: context,
+                              isScrollControlled: true,
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.vertical(
+                                  top: Radius.circular(32),
+                                ),
+                              ),
+                              builder: (_) => const BankCallSheet(),
+                            ),
+                            child: Text(s.callAction),
+                          ),
+                        )
+                      : null,
                   leading: low
                       ? Container(
                           width: 30,
                           height: 30,
                           alignment: Alignment.center,
-                          decoration: const BoxDecoration(
+                          decoration: ClaySurface.decoration(
                             color: AppColors.background,
-                            shape: BoxShape.circle,
+                            radius: 30,
                           ),
                           child: Text('${i + 1}', style: theme.titleMedium),
                         )
-                      : IconBadge(icon: advice[i].$3, color: AppColors.ink),
+                      : IconBadge(icon: advice[i].$2, color: AppColors.ink),
                 ),
             ],
           ),
-          if (level == RiskLevel.high || level == RiskLevel.dangerous) ...[
-            const SizedBox(height: 12),
-            InfoListCard(
-              children: [
-                InfoListTile(
-                  title: s.emergencyTitle,
-                  body: s.emergencyBody,
-                  leading: const IconBadge(icon: Icons.phone_outlined),
-                  trailing: OutlinedButton.icon(
-                    onPressed: () => _call(context),
-                    style: OutlinedButton.styleFrom(
-                      minimumSize: const Size(0, 44),
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                    ),
-                    icon: const Icon(Icons.call_outlined, size: 16),
-                    label: Text(s.call),
-                  ),
-                ),
-              ],
-            ),
-          ],
           const SizedBox(height: 30),
           PrimaryButton(
             key: const Key('scanAnother'),
@@ -169,11 +161,6 @@ class ResultScreen extends StatelessWidget {
             onPressed: () => Navigator.pop(context),
           ),
           const SizedBox(height: 18),
-          Text(
-            s.resultDisclaimer,
-            style: theme.bodySmall,
-            textAlign: TextAlign.center,
-          ),
         ],
       ),
     );
